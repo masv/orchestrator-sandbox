@@ -32,6 +32,8 @@ sudo apt-get -qy install \
 cat <<-EOF | mysql -uroot -proot
 GRANT SUPER, PROCESS, REPLICATION SLAVE, RELOAD ON *.* TO 'orc_client_user'@'%' IDENTIFIED BY 'orc_client_password';
 GRANT SUPER, PROCESS, REPLICATION SLAVE, RELOAD ON *.* TO 'orc_client_user'@'localhost' IDENTIFIED BY 'orc_client_password';
+GRANT SELECT ON mysql.slave_master_info TO 'orc_client_user'@'%';
+GRANT SELECT ON mysql.slave_master_info TO 'orc_client_user'@'localhost';
 EOF
 
 if [[ -e /vagrant/scripts/${HOSTNAME}-my.cnf ]]; then
